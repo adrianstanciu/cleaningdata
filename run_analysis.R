@@ -41,7 +41,7 @@ createTidyData <- function () {
     stdIndices <- grepl(("std()"), names(dataset), fixed = TRUE)
     datasetStdCols <- dataset[, stdIndices]
     
-    # step 2 - extract only measururements related to mean and standard deviation
+    # step 2 - extract only measurements related to mean and standard deviation
     datasetExtract <- cbind(datasetMeanCols, datasetStdCols)
     
     #add the subject and activity to the dataset
@@ -62,6 +62,7 @@ createTidyData <- function () {
     datasetExtract$activity <- factor(datasetExtract$activity,
         activities$number, activities$name)
     
+    # calculates the average of each variable for each activity and each subject
     tidyData <- aggregate(.~activity + subject, datasetExtract, mean)
     
     # store tidy data
